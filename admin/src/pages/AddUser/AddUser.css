@@ -1,0 +1,68 @@
+.add {
+    width: 100%;
+    margin-left: max(5vw, 25px);
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #6d6d6d;
+    font-size: 16px;
+    max-width: 900px;
+}
+
+.item-h2 {
+    font-family: "Lazurski";
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+.divider {
+    margin-bottom: 20px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, .3);
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.add-shop-name {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 550px;
+    margin-bottom: 10px;
+}
+
+.addshop-input {
+    width: 100%;
+    max-width: 550px;
+    padding: 10px 14px;
+    font-size: 13px;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-family: "Opensans";
+    font-size: 15px;
+    color: black;
+}
+
+.adduser-img {
+    width: 30px;
+    height: 30px;
+}
+
+.add-btn {
+    max-width: 550px;
+    max-width: 100%;
+    font-size: 13px;
+    border: none;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}

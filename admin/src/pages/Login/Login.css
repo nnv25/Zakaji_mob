@@ -1,0 +1,81 @@
+.login-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Полноэкранная высота */
+    background: black; /* Градиентный фон */
+  }
+  
+  .login-box {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .login-box h2 {
+    text-align: left;
+    margin-bottom: 20px;
+    color: black;
+    font-family: "Lazurski";
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .login-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  
+  .login-box input:focus {
+    outline: none;
+    border-color: black;
+  }
+  
+  .login-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-family: "OpenSans";
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-box button:hover {
+    background-color: black;
+  }
+  
+  .login-box button:focus {
+    outline: none;
+  }
+
+  @media (max-width:900px) {
+    .login-box {
+      max-width: 300px;
+      width: 80%;
+    }
+
+    .login-box h2 {
+      font-size: 15px;
+    }
+
+    .login-box input {
+      width: 100%;
+      font-size: 12px;
+    }
+
+    .login-box button {
+      width: 100%;
+      font-size: 12px;
+    }
+}

@@ -1,0 +1,128 @@
+.category-page {
+    width: 100%;
+    max-width: 900px;
+    margin-left: max(5vw, 25px);
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #333;
+    font-family: "Opensans", sans-serif;
+}
+
+.category-title {
+    font-family: "Lazurski";
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.category-divider {
+    margin-bottom: 25px;
+}
+
+.category-message {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.category-add-block {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.category-input {
+    flex: 1;
+    max-width: 400px;
+    padding: 10px 14px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    color: #000;
+    background: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.category-input:focus {
+    outline: none;
+    border-color: #cde589;
+}
+
+.category-add-btn {
+    padding: 10px 18px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.category-add-btn:hover:not(:disabled) {
+    background-color: #2c2c2c;
+}
+
+.category-add-btn:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.category-list {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+}
+
+.category-list-header {
+    display: grid;
+    grid-template-columns: 1fr 80px;
+    font-weight: bold;
+    font-size: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0f0f0;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.category-item {
+    display: grid;
+    grid-template-columns: 1fr 80px;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eaeaea;
+    transition: background-color 0.2s ease;
+}
+
+.category-item:hover {
+    background-color: #fafafa;
+}
+
+.category-name {
+    font-size: 15px;
+    color: #333;
+    word-break: break-word;
+}
+
+.category-delete {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    justify-self: center;
+    transition: transform 0.2s ease;
+}
+
+.category-delete:hover {
+    transform: scale(1.2);
+}
+
+.category-empty {
+    text-align: center;
+    color: #777;
+    font-size: 15px;
+    margin-top: 15px;
+}

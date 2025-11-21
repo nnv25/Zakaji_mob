@@ -1,0 +1,73 @@
+.my-shops {
+    margin: 20px 20px;
+}
+
+.my-shops .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.my-shops-h2 {
+    font-family: "Lazurski";
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.cart-items-title2 {
+    display: grid;
+    grid-template-columns: 5fr 10fr 10fr 6fr 4fr 4fr;
+    align-items: center;
+    background-color: #ffffff;
+    color: #ffffff;
+    font-size: max(1vw, 12px);
+}
+
+.cart-item-wrapper2 {
+    background-color: black;
+    border-right: 1px white solid;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.cart-item-wrapper2:first-child {
+    border-top-left-radius: 10px;
+}
+
+.cart-item-wrapper2:last-child {
+    border-top-right-radius: 10px;
+    border-right: none;
+}
+
+.cart-items-name2 {
+    font-family: "Opensans";
+    font-size: 14px;
+}
+
+.my-orders-order {
+    margin: 10px 0px;
+    color: black;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 0.5px black solid;
+}
+
+.shop_logo__wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+}
+
+.cart_item__txt {
+    font-family: "OpenSans";
+    font-size: 13px;
+}
+
+.cart-items__bottom {
+    width: 100%;
+    height: 45px;
+    background-color: black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}

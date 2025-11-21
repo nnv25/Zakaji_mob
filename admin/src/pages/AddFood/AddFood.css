@@ -1,0 +1,160 @@
+.product-title {
+	font-family: "Lazurski";
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+	margin-bottom: 10px;
+}
+
+.search-form-container {
+	margin-bottom: 20px;
+}
+
+.uploaded-image-container {
+	position: relative;
+	display: inline-block;
+	margin: 0px 20px 0px 0px !important;
+}
+
+.uploaded-image {
+	max-width: 80px;
+}
+
+.remove-image {
+	position: absolute;
+	top: -15px;
+	right: -15px;
+	background: red;
+	color: white;
+	border-radius: 50%;
+	cursor: pointer;
+	padding: 2px 6px;
+}
+
+.add-category {
+	margin-bottom: 10px;
+}
+
+.flex-col {
+	gap: 5px;
+}
+
+.add-text {
+	font-family: "Lazurski";
+	font-weight: normal;
+	color: black;
+}
+
+/* Variations container */
+.variations-container {
+	padding: 0px;
+	background-color: #f8f9fa;
+	border-radius: 8px;
+	margin-bottom: 10px;
+}
+
+/* Final price display */
+.final-price-display {
+	margin-top: 10px;
+	padding: 10px;
+	background-color: black;
+	border: 1px solid #c3e6cb;
+	border-radius: 5px;
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+	max-width: 450px;
+	width: 100%;
+}
+
+.variations-info {
+	font-family: "OpenSans";
+	font-size: 18px;
+	font-weight: bold;
+	color: black;
+	margin-bottom: 10px;
+}
+
+.variations-list {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 10px;
+}
+
+.variation-item {
+	margin: 8px 0;
+	padding: 10px 10px;
+	background-color: white;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	font-family: "OpenSans";
+	font-size: 18px;
+	color: black;
+}
+
+.variation-item:hover {
+	background-color: #e7f3ff;
+	transform: translateX(5px);
+	max-width: 450px;
+	width: 100%;
+}
+
+.variation-item.active {
+	background-color: black;
+	color: white;
+	font-weight: bold;
+	max-width: 450px;
+	width: 100%;
+}
+
+.variation-item strong {
+	display: inline-block;
+	margin-right: 8px;
+}
+
+.food-weight{
+	display: flex;
+	gap: 5px;
+	align-items: flex-end;
+}
+
+.image-preview-wrapper {
+	position: relative;
+	display: inline-block;
+	border-radius: 12px;
+	overflow: hidden;
+	width: 110px;
+}
+
+.remove-image {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	line-height: 22px;
+	text-align: center;
+	cursor: pointer;
+	z-index: 10;
+	transition: background-color 0.2s;
+}
+
+.remove-image:hover {
+	background-color: rgba(255, 0, 0, 0.7);
+}
+
+@media (max-width:900px) {
+	.add-text {
+		font-size: 14px;
+	}
+
+	.input-product {
+		width: 80%;
+	}
+}

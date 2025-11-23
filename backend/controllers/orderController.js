@@ -3,20 +3,52 @@ import User from "../models/userModel.js";
 import Restaurant from "../models/restaurantModel.js";
 import { io } from "../server.js";
 
-// ✅ Создание нового заказа
+/* ---------------------------------------------------------
+   🔥 ФУНКЦИЯ ОТПРАВКИ PUSH УВЕДОМЛЕНИЯ ЧЕРЕЗ EXPO
+--------------------------------------------------------- */
+async function sendPush(token, title, body, data = {}) {
+  try {
+    if (!token) return;
+
+    await fetch("https://exp.host/--/api/v2/push/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        to: token,
+        sound: "default",
+        title,
+        body,
+        data,
+      }),
+    });
+
+    console.log("📨 PUSH отправлен:", token);
+  } catch (err) {
+    console.error("❌ Ошибка отправки PUSH:", err);
+  }
+}
+
+/* ---------------------------------------------------------
+    🟢 СОЗДАНИЕ ЗАКАЗА
+--------------------------------------------------------- */
 export const createOrder = async (req, res) => {
   try {
-    const { userId, restaurantId, items, tableNumber, comment, totalPrice } = req.body;
+    const { userId, restaurantId, items, tableNumber, comment, totalPrice } =
+      req.body;
 
     if (!userId || !restaurantId || !items?.length || !tableNumber) {
-      return res.status(400).json({ message: "Не хватает данных для оформления заказа" });
+      return res
+        .status(400)
+        .json({ message: "Не хватает данных для оформления заказа" });
     }
 
     const user = await User.findById(userId);
     const restaurant = await Restaurant.findById(restaurantId);
 
     if (!user || !restaurant) {
-      return res.status(404).json({ message: "Пользователь или ресторан не найден" });
+      return res
+        .status(404)
+        .json({ message: "Пользователь или ресторан не найден" });
     }
 
     const order = await Order.create({
@@ -28,8 +60,20 @@ export const createOrder = async (req, res) => {
       totalPrice,
     });
 
-    // 🔥 отправляем событие ВСЕМ клиентам
+    // 🔥 Уведомить админку (websocket)
     io.emit("newOrder", order);
+
+    /* ---------------------------------------------
+       🔥 SEND PUSH TO USER (если есть токен)
+    ----------------------------------------------*/
+    if (user.expoPushToken) {
+      await sendPush(
+        user.expoPushToken,
+        "Ваш заказ успешно оформлен!",
+        `Ваш заказ №${order._id} принят в работу.`,
+        { orderId: order._id } // для навигации по клику
+      );
+    }
 
     res.status(201).json({ message: "Заказ успешно оформлен", order });
   } catch (error) {
@@ -38,8 +82,9 @@ export const createOrder = async (req, res) => {
   }
 };
 
-// ✅ История заказов пользователя (с полными URL картинок)
-// ✅ История заказов пользователя (с полными URL картинок)
+/* ---------------------------------------------------------
+    📌 ИСТОРИЯ ЗАКАЗОВ ПОЛЬЗОВАТЕЛЯ
+--------------------------------------------------------- */
 export const getUserOrders = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -60,8 +105,7 @@ export const getUserOrders = async (req, res) => {
       items: order.items.map((item) => ({
         ...item,
         image: item.image
-          ? // 👇 используем uploadsFood для блюд
-            `http://${req.headers.host}/uploadsFood/${item.image}`
+          ? `http://${req.headers.host}/uploadsFood/${item.image}`
           : `http://${req.headers.host}/uploads/no_image.png`,
       })),
     }));
@@ -73,7 +117,9 @@ export const getUserOrders = async (req, res) => {
   }
 };
 
-// ✅ Заказы конкретного ресторана
+/* ---------------------------------------------------------
+    📌 СПИСОК ЗАКАЗОВ РЕСТОРАНА (для админки)
+--------------------------------------------------------- */
 export const getRestaurantOrders = async (req, res) => {
   try {
     const { restaurantId } = req.params;
@@ -89,7 +135,9 @@ export const getRestaurantOrders = async (req, res) => {
   }
 };
 
-// ✅ Удаление заказа
+/* ---------------------------------------------------------
+    ❌ УДАЛЕНИЕ ЗАКАЗА
+--------------------------------------------------------- */
 export const deleteOrder = async (req, res) => {
   try {
     const { orderId } = req.params;
@@ -104,7 +152,9 @@ export const deleteOrder = async (req, res) => {
   }
 };
 
-// ✅ Обновление статуса (активация/деактивация)
+/* ---------------------------------------------------------
+    🔄 ПЕРЕКЛЮЧЕНИЕ СТАТУСА ЗАКАЗА
+--------------------------------------------------------- */
 export const toggleOrderStatus = async (req, res) => {
   try {
     const { orderId } = req.params;
@@ -117,10 +167,12 @@ export const toggleOrderStatus = async (req, res) => {
     order.active = !order.active;
     await order.save();
 
-    res.status(200).json({ message: "Статус заказа обновлён", active: order.active });
+    res.status(200).json({
+      message: "Статус заказа обновлён",
+      active: order.active,
+    });
   } catch (error) {
     console.error("Ошибка изменения статуса заказа:", error);
     res.status(500).json({ message: "Ошибка сервера" });
   }
 };
-

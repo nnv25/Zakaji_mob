@@ -16,6 +16,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useEffect, useState } from "react";
 import { API_URL } from '@/config/env';
 import SideMenu from '../SideMenu/SideMenu';
+import Constants from "expo-constants";
+
+console.log(Constants.expoConfig?.extra?.API_URL);
+
 
 export default function Home() {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -64,6 +68,10 @@ export default function Home() {
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
       <View style={styles.header}>
         <Header onMenuPress={() => setMenuVisible(true)} />
+        <Text style={{ color: "red" }}>
+          API: {Constants.expoConfig?.extra?.API_URL}
+        </Text>
+        <Text style={{ color: "blue" }}>{JSON.stringify(restaurants)}</Text>
         <SearchInput onSearch={setSearchQuery} />
         <Banner />
         <Tabs activeTab={activeTab} onChange={setActiveTab} />

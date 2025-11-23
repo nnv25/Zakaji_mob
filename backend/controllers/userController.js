@@ -70,3 +70,20 @@ export const deleteUser = async (req, res) => {
     return res.status(500).json({ message: "Ошибка сервера" });
   }
 };
+
+export const updatePushToken = async (req, res) => {
+  try {
+    const { userId, expoPushToken } = req.body;
+
+    if (!userId || !expoPushToken) {
+      return res.status(400).json({ message: "userId и токен обязательны" });
+    }
+
+    await User.findByIdAndUpdate(userId, { expoPushToken });
+
+    return res.status(200).json({ message: "Токен сохранён" });
+  } catch (err) {
+    console.error("Ошибка сохранения пуш токена:", err);
+    res.status(500).json({ message: "Ошибка сервера" });
+  }
+};

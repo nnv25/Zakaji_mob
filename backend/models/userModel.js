@@ -16,6 +16,9 @@ const userSchema = new mongoose.Schema({
       message: "Неверный формат номера телефона",
     },
   },
+  expoPushToken: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

@@ -136,7 +136,7 @@ const getFoods = async (req, res) => {
       weight: f.weight,
       price: f.price,
       category: f.category?.name || "—",
-      image: `https://${req.headers.host}/uploadsFood/${f.image}`,
+      image: `https://serv.zakaji.shop/uploadsFood/${f.image}`,
       restaurant: f.restaurant?.name || "—",
     }));
 

@@ -60,7 +60,7 @@ const getAllRestaurants = async (req, res) => {
       phone: r.phone,
       delivery: r.delivery,
       worktime: r.worktime,
-      image: `https://${req.headers.host}/uploads/${r.image}`,
+      image: `https://serv.zakaji.shop/uploads/${r.image}`,
       isBanned: r.isBanned,
     }));
 
@@ -88,7 +88,7 @@ const getRestaurantById = async (req, res) => {
       phone: restaurant.phone,
       delivery: restaurant.delivery,
       worktime: restaurant.worktime,
-      image: `https://${req.headers.host}/uploads/${restaurant.image}`,
+      image: `https://serv.zakaji.shop/uploads/${restaurant.image}`,
       isBanned: restaurant.isBanned,
     });
   } catch (error) {

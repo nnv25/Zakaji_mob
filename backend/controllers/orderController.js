@@ -99,14 +99,14 @@ export const getUserOrders = async (req, res) => {
       restaurant: {
         ...order.restaurant,
         image: order.restaurant?.image
-          ? `https://${req.headers.host}/uploads/${order.restaurant.image}`
-          : `https://${req.headers.host}/uploads/no_logo.png`,
+          ? `https://serv.zakaji.shop/uploads/${order.restaurant.image}`
+          : `https://serv.zakaji.shop/uploads/no_logo.png`,
       },
       items: order.items.map((item) => ({
         ...item,
         image: item.image
-          ? `https://${req.headers.host}/uploadsFood/${item.image}`
-          : `https://${req.headers.host}/uploads/no_image.png`,
+          ? `https://serv.zakaji.shop/uploadsFood/${item.image}`
+          : `https://serv.zakaji.shop/uploads/no_image.png`,
       })),
     }));
 

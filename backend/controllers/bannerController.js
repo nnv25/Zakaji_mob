@@ -40,7 +40,7 @@ export const getBanners = async (req, res) => {
         banner3: null,
       });
 
-    const base = `http://${req.headers.host}/uploadsBanner`;
+    const base = `https://${req.headers.host}/uploadsBanner`;
     res.status(200).json({
       banner1: banners.banner1 ? `${base}/${banners.banner1}` : null,
       banner2: banners.banner2 ? `${base}/${banners.banner2}` : null,

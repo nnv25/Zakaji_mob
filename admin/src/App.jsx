@@ -15,6 +15,7 @@ import CategoryManager from "./pages/CategoryManager/CategoryManager";
 import OrderList from "./pages/OrderList/OrderList";
 import AddBanners from "./pages/AddBanners/AddBanners";
 import AddUser from "./pages/AddUser/AddUser";
+import PushPage from "./pages/PushPage/PushPage";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -92,7 +93,7 @@ const App = () => {
               <Route path="/productlist" element={<FoodList />} />
               <Route path="/orders" element={<OrderList />} />
               <Route path="/ratinglist" element={<h2>Отзывы</h2>} />
-              <Route path="/balance" element={<h2>Push уведомления</h2>} />
+              <Route path="/push" element={<PushPage/>} />
             </>
           )}
 

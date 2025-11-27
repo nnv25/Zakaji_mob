@@ -70,7 +70,7 @@ export const createOrder = async (req, res) => {
       await sendPush(
         user.expoPushToken,
         "Ваш заказ успешно оформлен!",
-        `Ваш заказ №${order._id} принят в работу.`,
+        `Ваш заказ принят в работу.`,
         { orderId: order._id } // для навигации по клику
       );
     }

@@ -7,6 +7,7 @@ import {
   updateRestaurant,
   deleteRestaurant,
   toggleBanRestaurant,
+  notifyRestaurantClients
 } from "../controllers/restaurantController.js";
 
 const restaurantRouter = express.Router();
@@ -24,6 +25,7 @@ restaurantRouter.get("/:id", getRestaurantById);
 restaurantRouter.put("/update/:id", upload.single("image"), updateRestaurant);
 restaurantRouter.delete("/:id", deleteRestaurant);
 restaurantRouter.patch("/ban/:id", toggleBanRestaurant);
+restaurantRouter.post("/:id/notify-clients", notifyRestaurantClients);
 
 export default restaurantRouter;
 

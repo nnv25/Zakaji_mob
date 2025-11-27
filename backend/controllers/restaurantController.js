@@ -1,4 +1,6 @@
 import restaurantModel from "../models/restaurantModel.js";
+import { sendExpoPushBatch } from "../services/pushServices.js";
+import Order from "../models/orderModel.js";
 
 // ✅ Добавление ресторана
 const addRestaurant = async (req, res) => {
@@ -175,6 +177,73 @@ const toggleBanRestaurant = async (req, res) => {
   }
 };
 
+const notifyRestaurantClients = async (req, res) => {
+  try {
+    const { id: restaurantId } = req.params;
+    const { title, message, data } = req.body;
+
+    if (!title || !message) {
+      return res.status(400).json({ message: "Title и message обязательны" });
+    }
+
+    // 1️⃣ Находим все заказы ресторана
+    const orders = await Order.find({ restaurant: restaurantId }).populate(
+      "user",
+      "expoPushToken name phone"
+    );
+
+    // 2️⃣ Получаем пользователей с токенами
+    const clients = orders
+      .map((o) => o.user)
+      .filter((u) => u?.expoPushToken);
+
+    // 3️⃣ Убираем дубликаты (один клиент — один токен)
+    const uniqueClients = [];
+    const usedIds = new Set();
+
+    for (const user of clients) {
+      if (!usedIds.has(user._id.toString())) {
+        usedIds.add(user._id.toString());
+        uniqueClients.push(user);
+      }
+    }
+
+    if (uniqueClients.length === 0) {
+      return res.json({
+        success: true,
+        sent: 0,
+        message: "У ресторана пока нет клиентов с Push Token",
+      });
+    }
+
+    // 4️⃣ Формируем массив пуш-сообщений
+    const messagesToSend = uniqueClients.map((client) => ({
+      to: client.expoPushToken,
+      sound: "default",
+      title,
+      body: message,
+      data: data || {},
+    }));
+
+    // 5️⃣ Отправляем (batch)
+    const isOk = await sendExpoPushBatch(messagesToSend);
+
+    if (!isOk) {
+      return res.status(500).json({ message: "Ошибка отправки уведомлений" });
+    }
+
+    return res.json({
+      success: true,
+      sent: uniqueClients.length,
+      message: `Пуши отправлены ${uniqueClients.length} клиентам`,
+    });
+
+  } catch (err) {
+    console.error("Ошибка PUSH рассылки:", err);
+    return res.status(500).json({ message: "Ошибка сервера" });
+  }
+};
+
 export {
   addRestaurant,
   getAllRestaurants,
@@ -182,5 +251,6 @@ export {
   updateRestaurant,
   deleteRestaurant,
   toggleBanRestaurant,
+  notifyRestaurantClients
 };
 

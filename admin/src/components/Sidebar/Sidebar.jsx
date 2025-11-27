@@ -54,7 +54,7 @@ const Sidebar = ({ userRole }) => {
               <img src={assets.review_icon} className="sidebar-img" alt="" />
               <p>Отзывы</p>
             </NavLink>
-            <NavLink to="/balance" className="sidebar-option">
+            <NavLink to="/push" className="sidebar-option">
               <img src={assets.balance_icon} className="sidebar-img" alt="" />
               <p>Push уведомления</p>
             </NavLink>

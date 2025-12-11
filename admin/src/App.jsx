@@ -16,6 +16,8 @@ import OrderList from "./pages/OrderList/OrderList";
 import AddBanners from "./pages/AddBanners/AddBanners";
 import AddUser from "./pages/AddUser/AddUser";
 import PushPage from "./pages/PushPage/PushPage";
+import Privacy from "./pages/Privacy/Privacy";
+import { useLocation } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -24,6 +26,9 @@ const App = () => {
   const [checking, setChecking] = useState(true);
   const { selectedShop, setSelectedShop } = useContext(ShopContext);
 
+  const location = useLocation(); // <<< отслеживаем путь
+
+  // -------------------- АВТОРИЗАЦИЯ --------------------
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -44,7 +49,7 @@ const App = () => {
             restaurantId: data.restaurant?._id,
             username: data.name,
           });
-          if (data.restaurant?._id) setSelectedShop(data.restaurant._id); // ✅ подставляем сразу
+          if (data.restaurant?._id) setSelectedShop(data.restaurant._id);
         } else {
           localStorage.clear();
         }
@@ -58,25 +63,30 @@ const App = () => {
     checkAuth();
   }, []);
 
+  // -------------------- ДОСТУПНАЯ ДЛЯ ВСЕХ СТРАНИЦА --------------------
+  if (location.pathname === "/privacy") {
+    return <Privacy />;
+  }
+
   if (checking) return <p>Загрузка...</p>;
 
+  // -------------------- ЕСЛИ НЕТ ЛОГИНА — ПОКАЗЫВАЕМ LOGIN --------------------
   if (!user)
-    return <Login onLogin={setUser} setSelectedShop={setSelectedShop} />; // ✅ передаём
+    return <Login onLogin={setUser} setSelectedShop={setSelectedShop} />;
 
+  // -------------------- ОСНОВНОЙ ИНТЕРФЕЙС ПОСЛЕ АВТОРИЗАЦИИ --------------------
   return (
     <>
       <Navbar onLogout={() => setUser(null)} userRole={user.role} />
       <hr />
       <div className="app-content">
         <Sidebar userRole={user.role} />
+
         <Routes>
           {/* SUPERADMIN */}
           {user.role === "superadmin" && (
             <>
-              <Route
-                path="/"
-                element={<h2>Добро пожаловать, {user.username}</h2>}
-              />
+              <Route path="/" element={<h2>Добро пожаловать, {user.username}</h2>} />
               <Route path="/addshop" element={<AddRestaurant />} />
               <Route path="/shoplist" element={<RestaurantList />} />
               <Route path="/administrator" element={<AddUser />} />
@@ -93,17 +103,16 @@ const App = () => {
               <Route path="/productlist" element={<FoodList />} />
               <Route path="/orders" element={<OrderList />} />
               <Route path="/ratinglist" element={<h2>Отзывы</h2>} />
-              <Route path="/push" element={<PushPage/>} />
+              <Route path="/push" element={<PushPage />} />
             </>
           )}
 
           {/* WAITER */}
-          {(user.role === "superadmin" ||
-            user.role === "manager" ||
-            user.role === "waiter") && (
+          {(user.role === "superadmin" || user.role === "manager" || user.role === "waiter") && (
             <Route path="/orders" element={<OrderList />} />
           )}
 
+          {/* редирект */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
@@ -112,3 +121,4 @@ const App = () => {
 };
 
 export default App;
+

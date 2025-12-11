@@ -67,6 +67,10 @@ const Sidebar = ({ userRole }) => {
             <p>Заказы</p>
           </NavLink>
         )}
+        <NavLink to="/privacy" className="sidebar-option">
+          <img src={assets.balance_icon} className="sidebar-img" alt="" />
+          <p>Политика конфиденциальности</p>
+        </NavLink>
       </div>
     </div>
   );

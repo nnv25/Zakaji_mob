@@ -1,0 +1,80 @@
+.support {
+	min-height: 100vh;
+	background-color: #f9fafb;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 40px 16px;
+}
+
+.support-container {
+	max-width: 640px;
+	width: 100%;
+	background: #ffffff;
+	border-radius: 16px;
+	padding: 32px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.support-title {
+	font-size: 28px;
+	font-weight: 700;
+	margin-bottom: 16px;
+	color: #111827;
+}
+
+.support-text {
+	font-size: 15px;
+	line-height: 1.6;
+	color: #374151;
+	margin-bottom: 24px;
+}
+
+.support-contacts {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	margin-bottom: 28px;
+}
+
+.support-contact {
+	font-size: 16px;
+	color: #111827;
+}
+
+.support-contact .label {
+	font-weight: 600;
+	margin-right: 6px;
+}
+
+.support-contact a {
+	color: #000;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.support-contact a:hover {
+	text-decoration: underline;
+}
+
+.support-info h2 {
+	font-size: 20px;
+	margin-bottom: 12px;
+	color: #111827;
+}
+
+.support-info ul {
+	padding-left: 20px;
+	color: #374151;
+}
+
+.support-info li {
+	margin-bottom: 8px;
+	line-height: 1.5;
+}
+
+.support-footer {
+	margin-top: 24px;
+	font-size: 14px;
+	color: #6b7280;
+}

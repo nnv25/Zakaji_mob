@@ -17,6 +17,7 @@ import AddBanners from "./pages/AddBanners/AddBanners";
 import AddUser from "./pages/AddUser/AddUser";
 import PushPage from "./pages/PushPage/PushPage";
 import Privacy from "./pages/Privacy/Privacy";
+import SupportPage from "./pages/SupportPage/SupportPage";
 import { useLocation } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -67,6 +68,9 @@ const App = () => {
   if (location.pathname === "/privacy") {
     return <Privacy />;
   }
+  if (location.pathname === "/support") {
+    return <SupportPage />;
+  }
 
   if (checking) return <p>Загрузка...</p>;
 
@@ -86,7 +90,10 @@ const App = () => {
           {/* SUPERADMIN */}
           {user.role === "superadmin" && (
             <>
-              <Route path="/" element={<h2>Добро пожаловать, {user.username}</h2>} />
+              <Route
+                path="/"
+                element={<h2>Добро пожаловать, {user.username}</h2>}
+              />
               <Route path="/addshop" element={<AddRestaurant />} />
               <Route path="/shoplist" element={<RestaurantList />} />
               <Route path="/administrator" element={<AddUser />} />
@@ -108,7 +115,9 @@ const App = () => {
           )}
 
           {/* WAITER */}
-          {(user.role === "superadmin" || user.role === "manager" || user.role === "waiter") && (
+          {(user.role === "superadmin" ||
+            user.role === "manager" ||
+            user.role === "waiter") && (
             <Route path="/orders" element={<OrderList />} />
           )}
 
@@ -121,4 +130,3 @@ const App = () => {
 };
 
 export default App;
-
